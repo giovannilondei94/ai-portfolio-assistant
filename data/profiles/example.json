@@ -1,0 +1,48 @@
+{
+  "name": "John Doe",
+  "role": "Senior Full Stack Developer",
+  "headline": "Senior Full Stack Developer with experience in enterprise applications, backend systems, and frontend architecture.",
+  "summary": "Experienced Full Stack Developer with a solid background in building and maintaining scalable web applications. Skilled in backend development, frontend architecture, API integration, and collaboration in technical teams.",
+  "location": "Europe",
+  "yearsOfExperience": 8,
+  "strengths": [
+    "Enterprise software development",
+    "Backend architecture",
+    "Frontend engineering",
+    "API design and integration",
+    "Maintainable codebases",
+    "Technical collaboration"
+  ],
+  "techStack": {
+    "frontend": ["Angular", "React", "TypeScript", "HTML", "CSS"],
+    "backend": ["Java", "Spring Boot", "Node.js", "REST APIs"],
+    "databases": ["PostgreSQL", "MongoDB"],
+    "tools": ["Git", "Docker", "Maven"],
+    "other": ["Legacy modernization", "Enterprise applications"]
+  },
+  "languages": [
+    {
+      "name": "English",
+      "level": "Professional"
+    }
+  ],
+  "experiences": [
+    {
+      "company": "Example Company",
+      "period": "2020 - Present",
+      "role": "Senior Full Stack Developer",
+      "description": [
+        "Worked on enterprise web applications.",
+        "Built backend services and frontend features.",
+        "Collaborated with cross-functional teams."
+      ],
+      "tech": ["Java", "Spring Boot", "Angular", "PostgreSQL"]
+    }
+  ],
+  "projects": [
+    {
+      "name": "Example Enterprise Platform",
+      "description": "Contributed to the development and evolution of a business-critical web platform."
+    }
+  ]
+}
