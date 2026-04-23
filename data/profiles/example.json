@@ -1,24 +1,47 @@
 {
-  "name": "John Doe",
+  "name": "Alex Morgan",
   "role": "Senior Full Stack Developer",
-  "headline": "Senior Full Stack Developer with experience in enterprise applications, backend systems, and frontend architecture.",
-  "summary": "Experienced Full Stack Developer with a solid background in building and maintaining scalable web applications. Skilled in backend development, frontend architecture, API integration, and collaboration in technical teams.",
+  "headline": "Senior Full Stack Developer with experience in building scalable web applications and modernizing legacy systems.",
+  "summary": "Full Stack Developer with several years of experience working on web applications across backend and frontend. Skilled in building maintainable systems, developing APIs, and collaborating within technical teams to deliver reliable software solutions.",
   "location": "Europe",
-  "yearsOfExperience": 8,
+  "yearsOfExperience": 7,
   "strengths": [
-    "Enterprise software development",
-    "Backend architecture",
-    "Frontend engineering",
-    "API design and integration",
-    "Maintainable codebases",
-    "Technical collaboration"
+    "Full stack web development",
+    "Backend architecture and API design",
+    "Frontend application development",
+    "Working with legacy systems and modernization",
+    "Writing maintainable and scalable code",
+    "Collaboration in technical teams"
   ],
   "techStack": {
-    "frontend": ["Angular", "React", "TypeScript", "HTML", "CSS"],
-    "backend": ["Java", "Spring Boot", "Node.js", "REST APIs"],
-    "databases": ["PostgreSQL", "MongoDB"],
-    "tools": ["Git", "Docker", "Maven"],
-    "other": ["Legacy modernization", "Enterprise applications"]
+    "frontend": [
+      "React",
+      "Angular",
+      "TypeScript",
+      "JavaScript",
+      "HTML",
+      "CSS"
+    ],
+    "backend": [
+      "Node.js",
+      "Java",
+      "Spring Boot",
+      "REST APIs"
+    ],
+    "databases": [
+      "PostgreSQL",
+      "MongoDB"
+    ],
+    "tools": [
+      "Git",
+      "Docker",
+      "CI/CD"
+    ],
+    "other": [
+      "Web applications",
+      "System integration",
+      "Legacy modernization"
+    ]
   },
   "languages": [
     {
@@ -28,21 +51,45 @@
   ],
   "experiences": [
     {
-      "company": "Example Company",
-      "period": "2020 - Present",
+      "company": "Tech Solutions Ltd",
+      "period": "2021 - Present",
       "role": "Senior Full Stack Developer",
       "description": [
-        "Worked on enterprise web applications.",
-        "Built backend services and frontend features.",
-        "Collaborated with cross-functional teams."
+        "Develops and maintains web applications used in business environments.",
+        "Works on both backend services and frontend interfaces.",
+        "Collaborates with cross-functional teams to deliver new features."
       ],
-      "tech": ["Java", "Spring Boot", "Angular", "PostgreSQL"]
+      "tech": [
+        "Node.js",
+        "React",
+        "PostgreSQL"
+      ]
+    },
+    {
+      "company": "Digital Systems Co",
+      "period": "2018 - 2021",
+      "role": "Full Stack Developer",
+      "description": [
+        "Contributed to the development of web platforms and internal tools.",
+        "Worked on API development and frontend implementation.",
+        "Supported maintenance and evolution of existing systems."
+      ],
+      "tech": [
+        "Java",
+        "Spring Boot",
+        "Angular",
+        "MongoDB"
+      ]
     }
   ],
   "projects": [
     {
-      "name": "Example Enterprise Platform",
-      "description": "Contributed to the development and evolution of a business-critical web platform."
+      "name": "Enterprise Web Platform",
+      "description": "Contributed to the development of a web platform used to manage internal business processes."
+    },
+    {
+      "name": "System Modernization Initiative",
+      "description": "Worked on improving and modernizing legacy applications to enhance performance and maintainability."
     }
   ]
 }
