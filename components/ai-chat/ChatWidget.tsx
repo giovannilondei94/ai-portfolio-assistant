@@ -1,105 +1,38 @@
 "use client";
 
 import { FormEvent, PointerEvent as ReactPointerEvent, useEffect, useMemo, useRef, useState } from "react";
-
-type ChatMessage = {
-  role: "user" | "assistant";
-  content: string;
-};
-
-type Locale = "it" | "en";
-
-type Copy = {
-  widgetButtonLabel: string;
-  title: string;
-  subtitle: string;
-  closeLabel: string;
-  resizeLabel: string;
-  welcomeMessage: string;
-  thinkingMessage: string;
-  inputPlaceholder: string;
-  sendButtonLabel: string;
-  genericErrorMessage: string;
-  errorPrefix: string;
-  suggestions: string[];
-};
-
-const COPY: Record<Locale, Copy> = {
-  it: {
-    widgetButtonLabel: "AI Assistant",
-    title: "AI Portfolio Assistant",
-    subtitle: "Assistente profilo orientato ai recruiter",
-    closeLabel: "Chiudi chat",
-    resizeLabel: "Ridimensiona widget chat",
-    welcomeMessage:
-      "Ciao, sono l'AI Portfolio Assistant. Chiedimi informazioni su esperienza, competenze, tecnologie o background del candidato.",
-    thinkingMessage: "Sto pensando...",
-    inputPlaceholder: "Chiedi informazioni su esperienza, competenze o fit",
-    sendButtonLabel: "Invia",
-    genericErrorMessage: "Si è verificato un problema durante il contatto con l'assistente.",
-    errorPrefix: "Errore",
-    suggestions: [
-      "Riassumi il profilo",
-      "Quali sono le tecnologie che utilizza?",
-      "Quali sono i suoi principali punti di forza?"
-    ]
-  },
-  en: {
-    widgetButtonLabel: "AI Assistant",
-    title: "AI Portfolio Assistant",
-    subtitle: "Recruiter-focused profile assistant",
-    closeLabel: "Close chat",
-    resizeLabel: "Resize chat widget",
-    welcomeMessage:
-      "Hi, I’m the AI Portfolio Assistant. Ask me about the candidate’s experience, skills, technologies, or background.",
-    thinkingMessage: "Thinking...",
-    inputPlaceholder: "Ask about experience, skills, or fit",
-    sendButtonLabel: "Send",
-    genericErrorMessage: "Something went wrong while contacting the assistant.",
-    errorPrefix: "Error",
-    suggestions: [
-      "Summarize the profile",
-      "What technologies does he use?",
-      "What are his main strengths?"
-    ]
-  }
-};
-
-const MIN_WIDTH = 320;
-const MAX_WIDTH = 560;
-const MIN_HEIGHT = 420;
-const DEFAULT_WIDTH = 380;
-const DEFAULT_HEIGHT = 680;
-const DEFAULT_LOCALE: Locale = "it";
+import {
+  buildWelcomeMessage,
+  chatWidgetUiConfig,
+  ChatWidgetLocale,
+  getChatWidgetCopy
+} from "@/lib/config/chat-widget";
+import { ChatMessage, ChatResponse } from "@/types/chat";
 
 type ChatWidgetProps = {
   profileName: string;
   profileSlug?: string;
+  locale?: ChatWidgetLocale;
 };
 
-function getDisplayProfileName(profileName: string): string {
-  return profileName.trim() || "questo candidato";
-}
-
-function getWelcomeMessage(profileName: string): string {
-  const displayName = getDisplayProfileName(profileName);
-
-  return `Ciao, sono l'AI Portfolio Assistant di ${displayName}. Chiedimi informazioni su esperienza, competenze, tecnologie o background di ${displayName}.`;
-}
-
-export default function ChatWidget({ profileName, profileSlug = "example" }: ChatWidgetProps) {
-  const copy = COPY[DEFAULT_LOCALE];
+export default function ChatWidget({
+  profileName,
+  profileSlug,
+  locale = chatWidgetUiConfig.defaultLocale
+}: ChatWidgetProps) {
+  const copy = getChatWidgetCopy(locale);
+  const welcomeMessage = buildWelcomeMessage(profileName, locale);
   const [isOpen, setIsOpen] = useState(false);
-  const [input, setInput] = useState("");
+  const [inputValue, setInputValue] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>(() => [
     {
       role: "assistant",
-      content: getWelcomeMessage(profileName)
+      content: welcomeMessage
     }
   ]);
-  const [panelWidth, setPanelWidth] = useState(DEFAULT_WIDTH);
-  const [panelHeight, setPanelHeight] = useState(DEFAULT_HEIGHT);
+  const [panelWidth, setPanelWidth] = useState<number>(chatWidgetUiConfig.defaultWidth);
+  const [panelHeight, setPanelHeight] = useState<number>(chatWidgetUiConfig.defaultHeight);
   const inputRef = useRef<HTMLInputElement>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const resizeStateRef = useRef<{
@@ -137,24 +70,6 @@ export default function ChatWidget({ profileName, profileSlug = "example" }: Cha
   }, [isOpen, isLoading]);
 
   useEffect(() => {
-    setMessages((currentMessages) => {
-      if (
-        currentMessages.length !== 1 ||
-        currentMessages[0]?.role !== "assistant"
-      ) {
-        return currentMessages;
-      }
-
-      return [
-        {
-          role: "assistant",
-          content: getWelcomeMessage(profileName)
-        }
-      ];
-    });
-  }, [profileName]);
-
-  useEffect(() => {
     function handlePointerMove(event: PointerEvent) {
       const resizeState = resizeStateRef.current;
 
@@ -164,10 +79,12 @@ export default function ChatWidget({ profileName, profileSlug = "example" }: Cha
 
       const width = resizeState.startWidth - (event.clientX - resizeState.startX);
       const height = resizeState.startHeight - (event.clientY - resizeState.startY);
-      const maxHeight = Math.max(MIN_HEIGHT, Math.floor(window.innerHeight * 0.88));
+      const maxHeight = Math.max(chatWidgetUiConfig.minHeight, Math.floor(window.innerHeight * 0.88));
 
-      setPanelWidth(Math.min(Math.max(width, MIN_WIDTH), MAX_WIDTH));
-      setPanelHeight(Math.min(Math.max(height, MIN_HEIGHT), maxHeight));
+      setPanelWidth(
+        Math.min(Math.max(width, chatWidgetUiConfig.minWidth), chatWidgetUiConfig.maxWidth)
+      );
+      setPanelHeight(Math.min(Math.max(height, chatWidgetUiConfig.minHeight), maxHeight));
     }
 
     function handlePointerUp() {
@@ -197,16 +114,16 @@ export default function ChatWidget({ profileName, profileSlug = "example" }: Cha
   }
 
   async function sendMessage(content: string) {
-    const trimmedContent = content.trim();
+    const normalizedContent = content.trim();
 
-    if (!trimmedContent || isLoading) {
+    if (!normalizedContent || isLoading) {
       return;
     }
 
-    const nextMessages = [...messages, { role: "user" as const, content: trimmedContent }];
+    const nextMessages: ChatMessage[] = [...messages, { role: "user", content: normalizedContent }];
 
     setMessages(nextMessages);
-    setInput("");
+    setInputValue("");
     setIsLoading(true);
 
     try {
@@ -221,28 +138,21 @@ export default function ChatWidget({ profileName, profileSlug = "example" }: Cha
         })
       });
 
-      const data = (await response.json()) as { error?: string; reply?: string };
+      const data = (await response.json()) as ChatResponse;
 
-      if (!response.ok) {
-        throw new Error(data.error || "Request failed.");
+      if (!response.ok || !("reply" in data)) {
+        throw new Error("error" in data ? data.error : "Request failed.");
       }
-
-      if (!data.reply) {
-        throw new Error("Empty assistant reply.");
-      }
-
-      const reply = data.reply;
 
       setMessages((currentMessages) => [
         ...currentMessages,
         {
           role: "assistant",
-          content: reply
+          content: data.reply
         }
       ]);
     } catch (error) {
-      const message =
-        error instanceof Error ? error.message : copy.genericErrorMessage;
+      const message = error instanceof Error ? error.message : copy.genericErrorMessage;
 
       setMessages((currentMessages) => [
         ...currentMessages,
@@ -258,14 +168,14 @@ export default function ChatWidget({ profileName, profileSlug = "example" }: Cha
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    void sendMessage(input);
+    void sendMessage(inputValue);
   }
 
   return (
     <>
       {isOpen ? (
         <div
-          className="fixed right-4 bottom-4 z-50 flex max-w-[calc(100vw-2rem)] max-h-[calc(100vh-2rem)] flex-col overflow-hidden rounded-3xl border border-zinc-200 bg-white shadow-[0_24px_70px_rgba(15,23,42,0.18)]"
+          className="fixed right-4 bottom-4 z-50 flex max-h-[calc(100vh-2rem)] max-w-[calc(100vw-2rem)] flex-col overflow-hidden rounded-3xl border border-zinc-200 bg-white shadow-[0_24px_70px_rgba(15,23,42,0.18)]"
           style={{
             width: `${panelWidth}px`,
             height: `${panelHeight}px`
@@ -310,14 +220,17 @@ export default function ChatWidget({ profileName, profileSlug = "example" }: Cha
 
           <div className="flex-1 space-y-4 overflow-y-auto bg-zinc-50/70 px-4 py-4">
             {visibleMessages.map((message, index) => {
-              const isUser = message.role === "user";
+              const isUserMessage = message.role === "user";
 
               return (
-                <div key={`${message.role}-${index}-${message.content}`} className={isUser ? "flex justify-end" : "flex justify-start"}>
+                <div
+                  key={`${message.role}-${index}-${message.content}`}
+                  className={isUserMessage ? "flex justify-end" : "flex justify-start"}
+                >
                   <div
                     className={[
                       "max-w-[85%] rounded-2xl px-4 py-3 text-sm leading-6 shadow-sm",
-                      isUser
+                      isUserMessage
                         ? "rounded-br-md bg-zinc-950 text-white"
                         : "rounded-bl-md border border-zinc-200 bg-white text-zinc-800"
                     ].join(" ")}
@@ -335,15 +248,15 @@ export default function ChatWidget({ profileName, profileSlug = "example" }: Cha
               <input
                 ref={inputRef}
                 type="text"
-                value={input}
-                onChange={(event) => setInput(event.target.value)}
+                value={inputValue}
+                onChange={(event) => setInputValue(event.target.value)}
                 placeholder={copy.inputPlaceholder}
                 disabled={isLoading}
                 className="min-w-0 flex-1 rounded-2xl border border-zinc-300 px-4 py-3 text-sm text-zinc-950 outline-none transition placeholder:text-zinc-400 focus:border-zinc-950"
               />
               <button
                 type="submit"
-                disabled={isLoading || input.trim().length === 0}
+                disabled={isLoading || inputValue.trim().length === 0}
                 className="rounded-2xl bg-zinc-950 px-4 py-3 text-sm font-medium text-white transition hover:bg-zinc-800 disabled:cursor-not-allowed disabled:bg-zinc-300"
               >
                 {copy.sendButtonLabel}

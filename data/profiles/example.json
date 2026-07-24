@@ -1,95 +1,178 @@
 {
-  "name": "Alex Morgan",
-  "role": "Senior Full Stack Developer",
-  "headline": "Senior Full Stack Developer with experience in building scalable web applications and modernizing legacy systems.",
-  "summary": "Full Stack Developer with several years of experience working on web applications across backend and frontend. Skilled in building maintainable systems, developing APIs, and collaborating within technical teams to deliver reliable software solutions.",
-  "location": "Europe",
-  "yearsOfExperience": 7,
+  "name": "Giovanni Londei",
+  "role": "Sviluppatore Full-Stack",
+  "headline": "Sviluppatore Full-Stack Java e Angular con oltre 8 anni di esperienza in piattaforme enterprise per pubblica amministrazione e sanita.",
+  "summary": "Sviluppatore Full-Stack con oltre 8 anni di esperienza nella progettazione, evoluzione e manutenzione di applicazioni enterprise per la pubblica amministrazione e il settore sanitario. Specializzato nello sviluppo backend con Java e Spring Boot e nello sviluppo frontend con Angular, ha lavorato su piattaforme di produzione utilizzate su larga scala, occupandosi sia della modernizzazione di sistemi legacy sia della realizzazione di nuove funzionalita e integrazioni. Esperienza concreta in architetture a microservizi, API REST e domini complessi, con un approccio orientato a tradurre requisiti tecnico-funzionali in soluzioni affidabili e manutenibili.",
+  "location": "Urbino, Marche, Italia",
+  "yearsOfExperience": 8,
   "strengths": [
-    "Full stack web development",
-    "Backend architecture and API design",
-    "Frontend application development",
-    "Working with legacy systems and modernization",
-    "Writing maintainable and scalable code",
-    "Collaboration in technical teams"
+    "Sviluppo full-stack con Java, Spring Boot e Angular",
+    "Modernizzazione di sistemi legacy mission-critical",
+    "Progettazione di API REST e servizi backend enterprise",
+    "Esperienza su piattaforme per pubblica amministrazione e sanita",
+    "Traduzione di requisiti complessi in software di produzione manutenibile",
+    "Lavoro su applicazioni utilizzate su larga scala da enti e professionisti"
   ],
   "techStack": {
     "frontend": [
-      "React",
-      "Angular",
+      "AngularJS",
+      "Angular 7",
+      "Angular 17",
       "TypeScript",
       "JavaScript",
-      "HTML",
-      "CSS"
+      "HTML5"
     ],
     "backend": [
-      "Node.js",
-      "Java",
+      "Java 8-17",
       "Spring Boot",
+      "Java EE",
       "REST APIs"
     ],
     "databases": [
       "PostgreSQL",
-      "MongoDB"
+      "MongoDB",
+      "MySQL",
+      "Oracle"
     ],
     "tools": [
       "Git",
+      "Maven",
+      "Jenkins",
       "Docker",
-      "CI/CD"
+      "Postman",
+      "JUnit"
     ],
     "other": [
-      "Web applications",
-      "System integration",
-      "Legacy modernization"
+      "Microservizi",
+      "Kafka",
+      "AOP",
+      "Agile/Scrum",
+      "Kubernetes",
+      "Python",
+      "Next.js",
+      "OpenAI Codex",
+      "Claude Code"
     ]
   },
   "languages": [
     {
-      "name": "English",
-      "level": "Professional"
+      "name": "Italiano",
+      "level": "Madrelingua"
+    },
+    {
+      "name": "Inglese",
+      "level": "Intermedio superiore (B2)"
     }
   ],
   "experiences": [
     {
-      "company": "Tech Solutions Ltd",
-      "period": "2021 - Present",
-      "role": "Senior Full Stack Developer",
-      "description": [
-        "Develops and maintains web applications used in business environments.",
-        "Works on both backend services and frontend interfaces.",
-        "Collaborates with cross-functional teams to deliver new features."
+      "company": "Alten Italia",
+      "period": "01/2024 - Presente",
+      "role": "Sviluppatore Full-Stack",
+      "highlights": [
+        "Modernizzazione di una piattaforma di bilanci consolidati utilizzata da oltre 500 enti locali italiani e organizzazioni professionali.",
+        "Migrazione delle funzionalita principali da AngularJS ad Angular 17.",
+        "Progettazione e sviluppo di API REST e servizi backend Spring Boot per moduli migrati, nuove integrazioni e flussi di lavoro dedicati ai bilanci consolidati.",
+        "Manutenzione parallela di moduli legacy e moderni nel rispetto del ciclo di rilascio del cliente, garantendo continuita a una piattaforma di produzione nazionale."
       ],
-      "tech": [
-        "Node.js",
-        "React",
+      "technologies": [
+        "Java 8-17",
+        "Spring Boot",
+        "AngularJS",
+        "Angular 17",
         "PostgreSQL"
       ]
     },
     {
-      "company": "Digital Systems Co",
-      "period": "2018 - 2021",
-      "role": "Full Stack Developer",
-      "description": [
-        "Contributed to the development of web platforms and internal tools.",
-        "Worked on API development and frontend implementation.",
-        "Supported maintenance and evolution of existing systems."
+      "company": "Alten Italia",
+      "period": "11/2023 - 12/2023",
+      "role": "Sviluppatore Back-End Java (Freelance)",
+      "highlights": [
+        "Realizzazione di un sistema di audit distribuito per una piattaforma della pubblica amministrazione.",
+        "Sviluppo con Spring Boot e Kafka, con tracciabilita a livello di evento tra microservizi.",
+        "Implementazione di AOP per logging strutturato e monitoraggio degli eventi REST, mantenendo l'audit separato dalla logica di business."
       ],
-      "tech": [
-        "Java",
+      "technologies": [
+        "Java 17",
         "Spring Boot",
-        "Angular",
+        "Kafka",
+        "AOP",
+        "MongoDB"
+      ]
+    },
+    {
+      "company": "Wezen Technologies",
+      "period": "06/2021 - 10/2023",
+      "role": "Sviluppatore Full-Stack (Freelance)",
+      "highlights": [
+        "Sviluppo e manutenzione di un'applicazione sanitaria utilizzata da oltre 10.000 medici specialisti per coordinare riunioni cliniche multidisciplinari.",
+        "Collaborazione diretta con personale clinico e amministrativo per raccogliere requisiti e tradurre i flussi di lavoro in funzionalita di produzione su misura."
+      ],
+      "technologies": [
+        "Java 8",
+        "Spring Boot",
+        "AngularJS",
+        "Angular 7",
+        "PostgreSQL"
+      ]
+    },
+    {
+      "company": "GPI S.p.A.",
+      "period": "10/2017 - 05/2021",
+      "role": "Sviluppatore Full-Stack (Freelance)",
+      "highlights": [
+        "Sviluppo e manutenzione di moduli clinici e amministrativi core in un ecosistema HIS distribuito in oltre 2.000 strutture sanitarie pubbliche e private.",
+        "Gestione end-to-end dei moduli, dal front-end AngularJS ai servizi backend Java EE fino alla persistenza su PostgreSQL e MongoDB."
+      ],
+      "technologies": [
+        "Java EE",
+        "AngularJS",
+        "PostgreSQL",
         "MongoDB"
       ]
     }
   ],
   "projects": [
     {
-      "name": "Enterprise Web Platform",
-      "description": "Contributed to the development of a web platform used to manage internal business processes."
+      "name": "Piattaforma Bilanci Consolidati",
+      "description": "Evoluzione e modernizzazione di una piattaforma nazionale per la rendicontazione finanziaria del settore pubblico.",
+      "highlights": [
+        "Migrazione frontend da AngularJS ad Angular 17.",
+        "Sviluppo di servizi backend Spring Boot e API REST.",
+        "Supporto a una base utenti composta da enti locali e organizzazioni professionali."
+      ]
     },
     {
-      "name": "System Modernization Initiative",
-      "description": "Worked on improving and modernizing legacy applications to enhance performance and maintainability."
+      "name": "Sistema di Audit Distribuito",
+      "description": "Sistema di auditing per microservizi nella pubblica amministrazione con tracciabilita end-to-end degli eventi.",
+      "highlights": [
+        "Uso di Kafka per il flusso eventi tra servizi.",
+        "Logging strutturato con AOP.",
+        "Separazione dell'audit dalla logica di business."
+      ]
+    },
+    {
+      "name": "Applicazione Sanitaria per Riunioni Multidisciplinari",
+      "description": "Piattaforma software per il coordinamento di riunioni cliniche multidisciplinari in ambito sanitario.",
+      "highlights": [
+        "Utilizzata da oltre 10.000 medici specialisti.",
+        "Sviluppata a stretto contatto con personale clinico e amministrativo.",
+        "Personalizzazione dei flussi di lavoro clinici."
+      ]
+    },
+    {
+      "name": "Sistema Informativo Ospedaliero (HIS)",
+      "description": "Contributo allo sviluppo di moduli core clinici e amministrativi per un ecosistema ospedaliero diffuso su larga scala.",
+      "highlights": [
+        "Distribuzione in oltre 2.000 strutture sanitarie.",
+        "Copertura full-stack dal frontend alla persistenza dati.",
+        "Manutenzione e sviluppo in contesto enterprise sanitario."
+      ]
     }
-  ]
+  ],
+  "availability": {
+    "engagementTypes": [
+      "Remoto"
+    ]
+  }
 }

@@ -1,10 +1,9 @@
-import { getProfile } from "@/lib/profiles/getProfile";
-import { buildSystemPrompt } from "@/lib/ai/prompt";
+import { buildPortfolioAssistantSystemPrompt } from "@/lib/ai/buildSystemPrompt";
+import { loadProfile } from "@/lib/profiles/loadProfile";
 
 function run() {
-  const profile = getProfile({ slug: "example" });
-
-  const prompt = buildSystemPrompt(profile);
+  const profile = loadProfile({ profileSlug: "example" });
+  const prompt = buildPortfolioAssistantSystemPrompt(profile);
 
   console.log("===== SYSTEM PROMPT =====");
   console.log(prompt);

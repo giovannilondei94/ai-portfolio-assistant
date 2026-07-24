@@ -1,13 +1,8 @@
+import { buildProfileContext } from "@/lib/ai/buildProfileContext";
 import { Profile } from "@/types/profile";
-import { formatProfileContext } from "@/lib/ai/formatProfileContext";
 
-export type ChatMessage = {
-  role: "user" | "assistant";
-  content: string;
-};
-
-export function buildSystemPrompt(profile: Profile): string {
-  const profileContext = formatProfileContext(profile);
+export function buildPortfolioAssistantSystemPrompt(profile: Profile): string {
+  const profileContext = buildProfileContext(profile);
 
   return `
 You are an AI Portfolio Assistant.
@@ -38,8 +33,4 @@ Preferred response style:
 Candidate profile:
 ${profileContext}
 `.trim();
-}
-
-export function getRecentMessages(messages: ChatMessage[]): ChatMessage[] {
-  return messages.slice(-10);
 }
